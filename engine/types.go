@@ -14,8 +14,10 @@ type  Request struct {
 //定义函数返回的结果
 //函数需要返回解析后的并且封装后的种子对象(肯定是多个种子)
 //需要的有用信息items-定义成任意类型
+//这个是对象的属性 属性之间村值不用保存同步
 type ParseResult struct {
 	  Requests []Request
+	 //获得的真正有价值的爬虫信息
       Items []interface{}
 }
 
