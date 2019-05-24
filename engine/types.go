@@ -25,3 +25,6 @@ func NilParser([] byte) ParseResult{
 	//返回空的东西给它
 	return  ParseResult{}
 }
+
+//怎么实例化一个空的结构体 类型{}实例化也是，所以我们如果看到a{}这种 第一个想到的就是结构体实例化对象
+//跟脚本语言确实不同
