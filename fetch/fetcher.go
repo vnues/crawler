@@ -13,15 +13,29 @@ import (
 )
 
 //声明函数需要参数名 返回的=需要声明类型 error是全局类型
-func Fetcher(url sting)([]byte,error){
+func Fetcher(url string)([]byte,error){
 
-	   resp,err:=http.Get(url)
-	   //假设网址没有不能存在根本就没有请求
-	   if err !=nil{
-	   	 return nil,err
-	   }
-	   //defer的写法位置不能靠后---gegoole
+	//   resp,err:=http.Get(url)
+	//   //假设网址没有不能存在根本就没有请求
+	//   if err !=nil{
+	//   	 return nil,err
+	//   }
+	//   //defer的写法位置不能靠后---gegoole
+	//defer resp.Body.Close()
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36")
+
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	defer resp.Body.Close()
+
 	   //有请求但是不成功
 	   if resp.StatusCode !=http.StatusOK{
 	   	 return nil,fmt.Errorf("Wrong status code :%d",resp.StatusCode)
